@@ -38,4 +38,22 @@ export class CustomerService {
       catchError(this.handleError<Customer[]>('getCustomers', []))
     );
   }
+
+  getCustomer(id: number): Observable<Customer> {
+    const url = `${this.customersUrl}/${id}`;
+
+    return this.http.get<Customer>(url).pipe(
+      tap((_) => this.log(`fetched customer id=${id}`)),
+      catchError(this.handleError<Customer>(`getCustomer id=${id}`))
+    );
+  }
+
+  updateCustomer(customer: Customer): Observable<any> {
+    const url = `${this.customersUrl}/${customer.id}`;
+
+    return this.http.put(url, customer.name).pipe(
+      tap((_) => this.log(`updated hero id=${customer.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
 }
