@@ -52,8 +52,24 @@ export class CustomerService {
     const url = `${this.customersUrl}/${customer.id}`;
 
     return this.http.put(url, customer.name).pipe(
-      tap((_) => this.log(`updated hero id=${customer.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+      tap((_) => this.log(`updated customer id=${customer.id}`)),
+      catchError(this.handleError<any>('updateCustomer'))
+    );
+  }
+
+  addCustomer(Customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.customersUrl, Customer, this.httpOptions).pipe(
+      tap((newCustomer: Customer) => this.log(`added customer w/ id=${newCustomer.id}`)),
+      catchError(this.handleError<Customer>('addCustomer'))
+    );
+  }
+
+  deleteCustomer(id: number): Observable<Customer> {
+    const url = `${this.customersUrl}/${id}`;
+
+    return this.http.delete<Customer>(url, this.httpOptions).pipe(
+      tap((_) => this.log(`deleted customer id=${id}`)),
+      catchError(this.handleError<Customer>('deleteCustomer'))
     );
   }
 }
