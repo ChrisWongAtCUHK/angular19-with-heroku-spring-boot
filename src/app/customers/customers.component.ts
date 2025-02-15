@@ -32,9 +32,9 @@ export class CustomersComponent {
       return;
     }
     this.customerService
-      .addCustomer({ name } as Customer)
-      .subscribe((Customer) => {
-        this.customers.push(Customer);
+      .addCustomer(name)
+      .subscribe((customer) => {
+        this.customers.push(customer);
       });
   }
 
