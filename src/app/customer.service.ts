@@ -72,4 +72,19 @@ export class CustomerService {
       catchError(this.handleError<Customer>('deleteCustomer'))
     );
   }
+
+  searchCustomers(term: string): Observable<Customer[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Customer[]>(`${this.customersUrl}?name=${term}`).pipe(
+      tap((x) =>
+        x.length
+          ? this.log(`found customers matching "${term}"`)
+          : this.log(`no customers matching "${term}"`)
+      ),
+      catchError(this.handleError<Customer[]>('searchCustomers', []))
+    );
+  }
 }

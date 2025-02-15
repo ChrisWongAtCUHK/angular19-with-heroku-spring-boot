@@ -3,10 +3,11 @@ import { Customer } from '../customer';
 import { CustomerService } from '../customer.service';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CustomerSearchComponent } from '../customer-search/customer-search.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgFor, RouterLink],
+  imports: [NgFor, RouterLink, CustomerSearchComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
