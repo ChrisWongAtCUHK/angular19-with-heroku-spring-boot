@@ -19,7 +19,7 @@ export class CustomerService {
   };
 
   private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+    this.messageService.add(`CustomerService: ${message}`);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -34,7 +34,7 @@ export class CustomerService {
 
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.customersUrl).pipe(
-      tap((_) => this.log('fetched heroes')),
+      tap((_) => this.log('fetched customers')),
       catchError(this.handleError<Customer[]>('getCustomers', []))
     );
   }

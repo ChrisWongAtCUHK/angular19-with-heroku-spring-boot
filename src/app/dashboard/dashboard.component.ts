@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer';
 import { CustomerService } from '../customer.service';
 import { NgFor } from '@angular/common';
@@ -8,9 +8,9 @@ import { RouterLink } from '@angular/router';
   selector: 'app-dashboard',
   imports: [NgFor, RouterLink],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   customers: Customer[] = [];
 
   constructor(private customerService: CustomerService) {}
@@ -20,8 +20,9 @@ export class DashboardComponent {
   }
 
   getCustomers(): void {
-    this.customerService
-      .getCustomers()
-      .subscribe((customers) => (this.customers = customers.slice(1, 5)));
+    this.customerService.getCustomers().subscribe((customers) => {
+      this.customers = customers.slice(1, 5);
+      console.log(this.customers);
+    });
   }
 }
