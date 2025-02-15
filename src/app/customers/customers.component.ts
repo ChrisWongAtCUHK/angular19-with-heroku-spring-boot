@@ -16,6 +16,10 @@ export class CustomersComponent {
 
   constructor(private customerService: CustomerService) {}
 
+  ngOnInit(): void {
+    this.getcustomers();
+  }
+
   getcustomers(): void {
     this.customerService
       .getCustomers()
@@ -34,7 +38,10 @@ export class CustomersComponent {
       });
   }
 
-  delete(Customer: Customer): void {
-    this.customers = this.customers.filter((h) => h !== Customer);
+  delete(customer: Customer): void {
+    this.customers = this.customers.filter((h) => h !== customer);
+    this.customerService
+      .deleteCustomer(customer.id)
+      .subscribe((customer) => {});
   }
 }
